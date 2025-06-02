@@ -42,14 +42,14 @@ services:
       - type: bind
         source: ./database.db
         target: /database.db
-        # isDirectory: false
-        # content: ''
+        isDirectory: false
+        content: ''
 
       - type: bind
         source: ./filebrowser.json
         target: /.filebrowser.json
         read_only: true
-        # content: "{\n  \"address\": \"0.0.0.0\",\n  \"port\": 80\n}"
+        content: "{\n  \"address\": \"0.0.0.0\",\n  \"port\": 80\n}"
     healthcheck:
       test:
         - CMD

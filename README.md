@@ -1,31 +1,17 @@
-# docker-cronicle-python
+# Coolify Cronicle + FileBrowser
 
-Docker project for Cronicle, bundling a python environment and script runner.
+thanks to
+- https://github.com/soulteary/docker-cronicle/
+- https://github.com/jhuckaby/Cronicle
+- https://github.com/flavsdotpy/docker-cronicle-python
 
-## Instalation
-
-### 1. Prepare working dir
-
-* Execute: `make prepare`
-
-This command creates the folder `.cronicle` within your home directory.
-
-### 2. Build the image
-
-* Execute: `make build`
-
-This commands builds the docker image from this repo.
-
-### 3. Run container
-
-* Execute: `make run`
-
-This commands creates and runs a docker container with the image created above. It exposes the console at port `3012` and mounts the directory `$HOME/.cronicle` as the base for cronicle file system.
 
 Default account and password:
 
 - username: `admin`
 - password: `admin`
+
+
 
 ## Adding a new Python script to run
 
@@ -40,11 +26,3 @@ Default account and password:
   * Parameters (not required): single string of script parameters (i.e. `--v -f file.txt`)
 
 For all other configurations, please refer to [cronicle official docs](https://github.com/jhuckaby/Cronicle/blob/master/docs/WebUI.md).
-
-## Acknowledgments
-
-Thanks `soulteary` for making Cronicle available for Docker.
-
-## Authors
-
-* **[flavsdotpy](github.com/flavsdotpy)**

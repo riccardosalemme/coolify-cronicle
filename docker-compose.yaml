@@ -1,7 +1,6 @@
 services:
 
   cronicle:
-    # image: soulteary/cronicle:0.9.80
     build: 
       context: .
       dockerfile: Dockerfile
@@ -15,6 +14,7 @@ services:
       - ./data/data:/opt/cronicle/data
       - ./data/logs:/opt/cronicle/logs
       - ./data/plugins:/opt/cronicle/plugins
+      - ./data/scripts:/opt/cronicle/scripts
     environment:
       - TZ=Europe/Rome
     healthcheck:
@@ -26,3 +26,36 @@ services:
         driver: "json-file"
         options:
             max-size: "10m"
+
+  filebrowser:
+    image: 'filebrowser/filebrowser:latest'
+    # environment:
+    #   - SERVICE_FQDN_FILEBROWSER_80
+    ports:
+      - 3013:80
+    volumes:
+      - ./data/scripts:/cronicle/scripts
+        # type: bind
+        # source: ./data/scripts
+        # target: /cronicle/scripts
+        # isDirectory: true
+      - type: bind
+        source: ./database.db
+        target: /database.db
+        # isDirectory: false
+        # content: ''
+
+      - type: bind
+        source: ./filebrowser.json
+        target: /.filebrowser.json
+        read_only: true
+        # content: "{\n  \"address\": \"0.0.0.0\",\n  \"port\": 80\n}"
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - '-f'
+        - 'http://127.0.0.1:80'
+      interval: 2s
+      timeout: 10s
+      retries: 15

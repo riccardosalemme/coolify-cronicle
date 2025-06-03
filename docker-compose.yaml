@@ -6,8 +6,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     hostname: cronicle
-    # ports:
-    #   - 3012:3012
+    ports:
+      - 3022:3012
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
@@ -16,7 +16,7 @@ services:
       - ./data/plugins:/opt/cronicle/plugins
       - ./data/scripts:/opt/cronicle/scripts
     environment:
-      - SERVICE_FQDN_CRONICLE_3012
+      # - SERVICE_FQDN_CRONICLE_3012
       - TZ=Europe/Rome
     healthcheck:
       test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider localhost:3012/api/app/ping || exit 1"]
